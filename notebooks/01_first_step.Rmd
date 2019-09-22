@@ -1,0 +1,65 @@
+---
+title: The first notebook
+---
+
+
+# First section
+
+Load some packages, do some analysis, generate some plots...
+
+```{r setup}
+library(ggplot2)
+library(dplyr)
+```
+
+The following code block is hidden (code and results). 
+Define a function to compute the fibonacci sequence. 
+```{r include=FALSE}
+
+# return the nth fibonacci number
+fib_seq = function(n) {
+  if(n < 1) stop("n must be pos. integer.")
+  if (n == 1) {
+    return(1)
+  } else if (n == 2) {
+    return(1)
+  } else {
+    f0 = 1
+    f1 = 1
+    for (i in 3:n) {
+      tmp = f0 + f1
+      f0 = f1
+      f1 = tmp
+    }
+    return(f1)
+  }
+}
+```
+
+The following code block is hidden (hide code, show results). 
+
+Show the first 10 fibonacci numbers:
+```{r echo=FALSE}
+lapply(1:10, fib_seq)
+```
+
+
+The following code block suppresses the results:
+```{r results='hide'}
+lapply(1:10, fib_seq)
+```
+
+
+
+# Summary
+Every notebook should hava summary section that's understandable by biologists.
+Include the 'highlights' here and repeat the corresponding figures.
+
+```{r}
+iris %>%
+  ggplot(aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + 
+  geom_point() + 
+  scale_color_brewer(type="qual", palette="Dark2")
+```
+
+
