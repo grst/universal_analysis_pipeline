@@ -7,5 +7,11 @@ Nextflow-based pipeline to run and deploy reproducible analyses.
 * deploy reports to GitHub pages. 
 
 
+## Configuration
+* github URL
+* access token
+* plug togehter analysis steps. 
+
+
 ## Ideas
 * convert conda envs to singularity containers to ensure reproducibility. 
