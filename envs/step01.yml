@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - r-base >=3.6.1
+  - python >=3.7
   - r-rmarkdown
   - r-reticulate
   - r-bookdown
