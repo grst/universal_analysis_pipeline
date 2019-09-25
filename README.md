@@ -1,6 +1,6 @@
-|b-travis|
-
 # Universal data analysis pipeline
+[![Build Status](https://travis-ci.com/grst/universal_analysis_pipeline.svg?branch=master)](https://travis-ci.com/grst/universal_analysis_pipeline)
+
 Nextflow-based pipeline to run and deploy reproducible analyses.
 
 ## Features

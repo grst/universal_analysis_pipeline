@@ -14,5 +14,7 @@ dependencies:
   - jupytext
   - nbconvert
   - ipykernel
+  - matplotlib
+  - pandas
 
 
