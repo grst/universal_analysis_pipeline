@@ -67,7 +67,7 @@ process run_step02_papermill {
     output:
         file "report.html"
 
-    publishDir "results/02_analyze_data_rmd"
+    publishDir "results/02_analyze_data_papermill"
 
     """
     render_papermill.py notebook.Rmd \

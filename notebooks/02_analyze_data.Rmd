@@ -2,6 +2,17 @@
 title: The second notebook
 params:
   input_file: NULL
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.1'
+      jupytext_version: 1.2.3
+  kernelspec:
+    display_name: Python [conda env:.conda-vanderburg_oropharyngeal_cancer]
+    language: python
+    name: conda-env-.conda-vanderburg_oropharyngeal_cancer-py
 ---
 
 # First section
@@ -19,8 +30,9 @@ The following setup allows to run the parametrized report with both rmarkdown an
 
 * We first try to get the results `r.params` through reticulate. (default parameters are defined in the YAML header)
 * If that fails, we use the papermill notation to define default parameters.
+* the cell needs to be tagged with `parameters` (see metadata)
 
-```{python}
+```{python tags=c("parameters")}
 # get default parameters. Either papermill or rmarkdown way.
 try:
     input_file = r.params["input_file"]
@@ -51,6 +63,8 @@ def fib(num):
             a, b = b, c
 
         return c
+
+print("Fibonacci number 42: " + fib(42))
 ```
 
 
@@ -80,7 +94,7 @@ plt.plot(range(10), [fib(x) for x in range(10)])
 Every notebook should hava summary section that's understandable by biologists.
 Include the 'highlights' here and repeat the corresponding figures.
 
-```{python, echo=FALSE}
+```{python echo=FALSE}
 iris = pd.read_csv(input_file, sep="\t")
 import matplotlib.cm as cmx
 import matplotlib.colors as colors
