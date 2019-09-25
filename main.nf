@@ -14,7 +14,7 @@ process run_step01 {
         file 'notebook.Rmd'
 
     output:
-        file "iris.csv"
+        file "iris.tsv"
         file "report.html"
 
     publishDir "results/01_generate_data"
@@ -23,7 +23,7 @@ process run_step01 {
     render_rmd.py notebook.Rmd \
         report.html \
         --cpus=${task.cpus} \
-        --params="out_file=iris.csv"
+        --params="out_file=iris.tsv"
     """
 }
 

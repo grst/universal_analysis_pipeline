@@ -5,21 +5,21 @@ params:
 ---
 
 ```{r setup}
-library(ggplot)
+library(ggplot2)
 library(dplyr)
 library(readr)
 ```
 
 ## A plot.
 ```{r}
-ggplot(iris, aes(x=Sepal.Width, y=Sepal.length, color=Species)) +
+ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) +
   geom_point() +
   theme_bw()
 ```
 
 ## Export data
-```{r}
-write_tsv(iris, params["out_file"])
+```{r, message=FALSE}
+write_tsv(iris, params$out_file)
 ```
 
 

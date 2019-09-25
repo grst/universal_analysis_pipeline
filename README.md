@@ -1,3 +1,5 @@
+|b-travis|
+
 # Universal data analysis pipeline
 Nextflow-based pipeline to run and deploy reproducible analyses.
 
