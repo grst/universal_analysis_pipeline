@@ -1,0 +1,25 @@
+---
+title: First notebook (in R)
+params:
+  out_file: NULL
+---
+
+```{r setup}
+library(ggplot)
+library(dplyr)
+library(readr)
+```
+
+## A plot.
+```{r}
+ggplot(iris, aes(x=Sepal.Width, y=Sepal.length, color=Species)) +
+  geom_point() +
+  theme_bw()
+```
+
+## Export data
+```{r}
+write_tsv(iris, params["out_file"])
+```
+
+

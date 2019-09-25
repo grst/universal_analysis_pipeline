@@ -1,0 +1,21 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base >=3.6.1
+  - r-rmarkdown
+  - r-reticulate
+  - r-bookdown
+  - r-rmdformats
+  - ipython
+  - docopt
+  - papermill
+  - jupytext
+  - nbconvert
+  - ipykernel
+  - r-ggplot2
+  - r-dplyr
+  - r-readr
+
+
