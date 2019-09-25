@@ -20,7 +20,7 @@ install:
   - conda info -a
 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n nextflow python=$TRAVIS_PYTHON_VERSION nextflow
+  - conda create -q -c bioconda -c conda-forge -n nextflow python=$TRAVIS_PYTHON_VERSION nextflow
   - conda activate nextflow
 
 script:
