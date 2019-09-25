@@ -1,5 +1,5 @@
 ---
-title: The first notebook
+title: The second notebook
 params:
   input_file: NULL
 ---

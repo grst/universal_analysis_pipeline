@@ -4,16 +4,17 @@ channels:
   - defaults
 dependencies:
   - r-base >=3.6.1
+  - python >=3.7
   - r-rmarkdown
   - r-reticulate
   - r-bookdown
   - r-rmdformats
-  - ipython
+  - ipython >=7.8.0
   - docopt
-  - papermill
+  - papermill >=1.2.0
   - jupytext
   - nbconvert
-  - ipykernel
+  - ipykernel >=5.1.2
   - matplotlib
   - pandas
 

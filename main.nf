@@ -53,9 +53,34 @@ process run_step02_rmd {
 }
 
 
+//Step 2b: render using Papermill (include figures, hide input/output)
+//This notebook is in python.
+process run_step02_papermill {
+    conda "envs/render.yml"  //...or use a generic env for multiple steps.
+    echo true
+    cpus 2
+
+    input:
+        file 'notebook.Rmd'
+        file 'iris.tsv'
+
+    output:
+        file "report.html"
+
+    publishDir "results/02_analyze_data_rmd"
+
+    """
+    render_papermill.py notebook.Rmd \
+        report.html \
+        --cpus=${task.cpus} \
+        --params="input_file=iris.tsv"
+    """
+}
 
 workflow {
     run_step01(file('notebooks/01_generate_data.Rmd'))
     run_step02_rmd(file('notebooks/02_analyze_data.Rmd'),
+               run_step01.out.first)
+    run_step02_papermill(file('notebooks/02_analyze_data.Rmd'),
                run_step01.out.first)
 }
