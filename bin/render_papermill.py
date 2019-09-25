@@ -36,17 +36,13 @@ def jupytext_convert(nb_path, out_file):
 
 
 def run_papermill(nb_path, out_file, params):
-  """execute .ipynb file using papermill and write
+    """execute .ipynb file using papermill and write
   results to out_file in ipynb format.
   """
-  # excplicitly specify the Python 3 kernel to override the notebook-metadata.
-  pm.execute_notebook(
-      nb_path,
-      out_file,
-      parameters=params,
-      log_output=True,
-      kernel_name="python3"
-  )
+    # excplicitly specify the Python 3 kernel to override the notebook-metadata.
+    pm.execute_notebook(
+        nb_path, out_file, parameters=params, log_output=True, kernel_name="python3"
+    )
 
 
 def convert_to_html(nb_path, out_file):
@@ -94,6 +90,4 @@ if __name__ == "__main__":
 
     set_cpus(arguments["--cpus"])
 
-    render_papermill(arguments['<notebook>'], arguments['<out_file>'], params)
-
-
+    render_papermill(arguments["<notebook>"], arguments["<out_file>"], params)

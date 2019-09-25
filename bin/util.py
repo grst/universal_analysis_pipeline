@@ -18,4 +18,4 @@ def set_cpus(n_cpus):
 
 def parse_params(params):
     """Parse a comma-separated key-value list into a dictionary"""
-    return dict(token.split('=') for token in shlex.split(params))
+    return dict(token.split("=") for token in shlex.split(params))
