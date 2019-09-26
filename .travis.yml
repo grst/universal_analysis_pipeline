@@ -26,5 +26,5 @@ install:
   - conda activate nextflow
 
 script:
-  ./main.nf
-  ./.test.py
+  - ./main.nf
+  - ./.test.py

@@ -72,6 +72,7 @@ def convert_to_html(nb_path, out_file):
 
     html_exporter = HTMLExporter()
     html_exporter.template_file = "full"
+    html_exporter.register_
 
     html, resources = html_exporter.from_notebook_node(nb)
 
@@ -89,13 +90,14 @@ def render_papermill(input_file, output_file, params=None):
         output_file: path to output (html) file.
         params: dictionary that will be passed to papermill.
     """
-    nb = jtx.read(input_file)
-    prepare_cell_tags(nb)
 
-    tmp_nb_executed = NamedTemporaryFile(suffix=".ipynb")
-    jtx.write(nb, tmp_nb_executed.name)
-    convert_to_html(tmp_nb_executed.name, output_file)
-    tmp_nb_executed.close()
+    with NamedTempoaryFile(suffix=".ipynb") as tmp_nb_converted:
+        with NamedTemporaryFile(suffix=".ipynb") as tmp_nb_executed:
+            nb = jtx.read(input_file)
+            prepare_cell_tags(nb)
+            jtx.write(nb, tmp_nb_converted.name)
+            run_papermill(tmp_nb_converted.name, tmp_nb_executed.name, params=params)
+            convert_to_html(tmp_nb_executed.name, output_file)
 
 
 if __name__ == "__main__":
