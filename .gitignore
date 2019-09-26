@@ -18,3 +18,4 @@ raw
 .nextflow*
 work
 deploy
+.access_token

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-ACCESS_TOKEN=0k0281r35j513u4ezlxt
+
+if [ ! -f ".access_token" ]; then
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1 > .access_token
+fi
+ACCESS_TOKEN=$(cat .access_token)
 
 # create github-pages branch if it doesn't exist
 if [ ! -d "deploy/.git" ]; then
