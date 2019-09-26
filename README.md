@@ -49,6 +49,13 @@ The results will be protected by a randomly generated folder name. It is stored 
 ```
 ./deploy.sh
 ```
+If you already have a gh-pages branch in your repo, this might fail. 
+In that case, change into the `deploy` directory and sort out the problem. For instance, force-push 
+the `gh-pages` branch: 
+```
+cd deploy
+git push -u origin gh-pages --force
+```
 
 
   
