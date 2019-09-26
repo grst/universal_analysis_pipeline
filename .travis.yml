@@ -27,3 +27,4 @@ install:
 
 script:
   ./main.nf
+  ./.test.py
