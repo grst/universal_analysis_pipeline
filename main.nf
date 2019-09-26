@@ -77,6 +77,12 @@ process run_step02_papermill {
     """
 }
 
+process deploy {
+    """
+    ./deploy.sh
+    """
+}
+
 workflow {
     run_step01(file('notebooks/01_generate_data.Rmd'))
     run_step02_rmd(file('notebooks/02_analyze_data.Rmd'),
