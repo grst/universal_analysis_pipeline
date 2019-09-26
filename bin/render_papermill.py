@@ -22,6 +22,7 @@ from os.path import splitext
 import nbformat
 from tempfile import NamedTemporaryFile
 from nbconvert import HTMLExporter
+from nbconvert.preprocessors import TagRemovePreprocessor
 from docopt import docopt
 from util import set_cpus, parse_params
 from shutil import copyfile
@@ -71,8 +72,13 @@ def convert_to_html(nb_path, out_file):
         nb = nbformat.read(f, as_version=4)
 
     html_exporter = HTMLExporter()
+    tag_remove_preprocessor = TagRemovePreprocessor(
+        remove_cell_tags=["remove_cell"],
+        remove_all_outputs_tags=["hide_output"],
+        remove_input_tags=["hide_input"],
+    )
     html_exporter.template_file = "full"
-    html_exporter.register_
+    html_exporter.register_preprocessor(tag_remove_preprocessor, enabled=True)
 
     html, resources = html_exporter.from_notebook_node(nb)
 
@@ -91,7 +97,7 @@ def render_papermill(input_file, output_file, params=None):
         params: dictionary that will be passed to papermill.
     """
 
-    with NamedTempoaryFile(suffix=".ipynb") as tmp_nb_converted:
+    with NamedTemporaryFile(suffix=".ipynb") as tmp_nb_converted:
         with NamedTemporaryFile(suffix=".ipynb") as tmp_nb_executed:
             nb = jtx.read(input_file)
             prepare_cell_tags(nb)

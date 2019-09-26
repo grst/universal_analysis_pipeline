@@ -18,9 +18,12 @@ report_dict = {
 }
 
 for name, contents in report_dict.items():
-  assert "INCLUDE_FALSE" not in contents, "{}: hide cell works".format(name)
   assert "ECHO_FALSE" not in contents, "{}: hide input works".format(name)
   assert "RESULTS_HIDE" not in contents, "{}: hide output works".format(name)
+  assert "ECHO_TRUE_01" in contents, "{}, show input works".format(name)
+  assert "ECHO_TRUE_02" in contents, "{}, show input works".format(name)
+  assert "RESULTS_SHOW_01" in contents, "{}, show results works".format(name)
+  assert "RESULTS_SHOW_02" in contents, "{}, show results works".format(name)
 
 
 
