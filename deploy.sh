@@ -3,10 +3,12 @@ ACCESS_TOKEN=0k0281r35j513u4ezlxt
 
 # create github-pages branch if it doesn't exist
 if [ ! -d "deploy/.git" ]; then
-  cp -R .git deploy/.git
+  mkdir -p deploy
+  git init deploy
+  REMOTE=$(git config --get remote.origin.url)
   cd deploy
-  git checkout --orphan gh-pages || git checkout -b gh-pages
-  git add -A
+  git remote add origin $REMOTE
+  git checkout --orphan gh-pages
   git commit --allow-empty -m "init gh-pages"
   cd ..
 fi

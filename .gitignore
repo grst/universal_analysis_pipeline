@@ -15,7 +15,6 @@ __pycache__
 raw
 .Rhistory
 .idea
-deploy/*
-!deploy/.gitignore
 .nextflow*
 work
+deploy
