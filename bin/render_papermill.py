@@ -27,12 +27,32 @@ from util import set_cpus, parse_params
 from shutil import copyfile
 
 
-def jupytext_convert(nb_path, out_file):
-    """Convert one jupytext format to another. Formats
-    are inferred from the file extensions.
+def prepare_cell_tags(nb):
+    """Transfer jupytext metadata (hide_input etc.)
+    to consistent `tags` metadata, that can be
+    handled by a nbconvert `TagRemovePreprocessor`.
+
+    This is temporary until there is a consistent solution
+    for mwouts/jupytext#337
+
+    Args:
+        nb: jupyter notebook read into dict using `nbformat.read`
     """
-    nb = jtx.read(nb_path)
-    jtx.writef(nb, out_file)
+
+    def _fix_metadata(cell):
+        m = cell["metadata"]
+        tags = m.get("tags", list())
+        if "hide_input" in m and m["hide_input"]:
+            tags.append("hide_input")
+        if "hide_output" in m and m["hide_output"]:
+            # jupytext converts rmarkdown `include=FALSE` incorrectly.
+            tags.append("remove_cell")
+        if "results" in m and m["results"].strip("'" + '"') == "hide":
+            tags.append("hide_output")
+        m["tags"] = list(set(tags))
+
+    for cell in nb["cells"]:
+        _fix_metadata(cell)
 
 
 def run_papermill(nb_path, out_file, params):
@@ -69,18 +89,12 @@ def render_papermill(input_file, output_file, params=None):
         output_file: path to output (html) file.
         params: dictionary that will be passed to papermill.
     """
-    tmp_nb_converted = NamedTemporaryFile(suffix=".ipynb")
-    if splitext(input_file)[-1] != ".ipynb":
-        jupytext_convert(input_file, tmp_nb_converted.name)
-    else:
-        copyfile(input_file, tmp_nb_converted.name)
+    nb = jtx.read(input_file)
+    prepare_cell_tags(nb)
 
     tmp_nb_executed = NamedTemporaryFile(suffix=".ipynb")
-    run_papermill(tmp_nb_converted.name, tmp_nb_executed.name, params)
-
-    tmp_nb_converted.close()
+    jtx.write(nb, tmp_nb_executed.name)
     convert_to_html(tmp_nb_executed.name, output_file)
-
     tmp_nb_executed.close()
 
 

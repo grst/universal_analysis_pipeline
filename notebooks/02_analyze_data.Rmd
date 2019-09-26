@@ -46,7 +46,7 @@ except:
 
 ## The following code block is hidden (code and results).
 Define a function to compute the fibonacci sequence.
-```{python}
+```{python, include=FALSE}
 # TEST: INCLUDE_FALSE
 # define fibonacci function
 # source: https://dev.to/teosoft7/how-to-implement-fibonacci-sequence-with-python-4cfo
