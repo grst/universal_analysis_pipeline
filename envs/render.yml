@@ -17,6 +17,7 @@ dependencies:
   - papermill =1.2.0
   - jupytext =1.2.4
   - nbconvert =5.6.0
+  - pandoc =2.7.3
   # run notebook interactively in jupyter notebook
   - ipykernel >=5.1.2
   # for the notebooks

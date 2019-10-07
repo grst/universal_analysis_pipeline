@@ -18,7 +18,7 @@ Options:
 import papermill as pm
 import jupytext as jtx
 import os
-from os.path import splitext
+from os import path
 import nbformat
 from tempfile import NamedTemporaryFile
 from nbconvert import HTMLExporter
@@ -26,6 +26,7 @@ from nbconvert.preprocessors import TagRemovePreprocessor
 from docopt import docopt
 from util import set_cpus, parse_params
 from shutil import copyfile
+from subprocess import call
 
 
 def prepare_cell_tags(nb):
@@ -66,7 +67,7 @@ def run_papermill(nb_path, out_file, params):
     )
 
 
-def convert_to_html(nb_path, out_file):
+def convert_to_html_nbconvert(nb_path, out_file):
     """convert executed ipynb file to html document. """
     with open(nb_path) as f:
         nb = nbformat.read(f, as_version=4)
@@ -86,6 +87,38 @@ def convert_to_html(nb_path, out_file):
         f.write(html)
 
 
+def convert_to_html_pandoc(nb_path, out_file):
+    cmd = """
+          pandoc \
+            +RTS -K512m -RTS \
+            {input_file} \
+            --output {output_file} \
+            --email-obfuscation none \
+            --self-contained \
+            --mathjax \
+            --variable 'mathjax-url:https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML' \
+            --variable 'lightbox:true' \
+            --variable 'thumbnails:true' \
+            --variable 'gallery:false' \
+            --variable 'cards:true' \
+            --standalone \
+            --section-divs \
+            --table-of-contents \
+            --toc-depth 1 \
+            --template {html_template} \
+#            --css {css_template} \
+            --highlight-style pygments \
+    """
+
+    template_path = path.join(path.abspath(path.dirname(__file__)), 'templates/adaptive-bootstrap/standalone.html')
+    css_path = path.join(path.abspath(path.dirname(__file__)), 'templates/adaptive-bootstrap/template.css')
+
+    call(cmd.format(input_file=nb_path,
+                    output_file=out_file,
+                    html_template=template_path,
+                    css_template=css_path), shell=True)
+
+
 def render_papermill(input_file, output_file, params=None):
     """
     Wrapper function to render a jupytext/jupyter notebook
@@ -103,7 +136,7 @@ def render_papermill(input_file, output_file, params=None):
             prepare_cell_tags(nb)
             jtx.write(nb, tmp_nb_converted.name)
             run_papermill(tmp_nb_converted.name, tmp_nb_executed.name, params=params)
-            convert_to_html(tmp_nb_executed.name, output_file)
+            convert_to_html_pandoc(tmp_nb_executed.name, output_file)
 
 
 if __name__ == "__main__":
