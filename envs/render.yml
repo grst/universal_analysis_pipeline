@@ -6,18 +6,8 @@ dependencies:
   # base
   - r-base =3.6.1
   - python >=3.7
-  # render rmd
-  - r-rmarkdown =1.15
-  - r-reticulate =1.12
-  - r-bookdown =0.12
-  - r-rmdformats =0.3.5
-  # render papermill
-  - ipython >=7.8.0
-  - docopt =0.6.2
-  - papermill =1.2.0
-  - jupytext =1.2.4
-  - nbconvert =5.6.0
-  - pandoc =2.7.3
+  # render notebooks
+  - reportsrender >=0.3
   # run notebook interactively in jupyter notebook
   - ipykernel >=5.1.2
   # for the notebooks

@@ -6,12 +6,8 @@ dependencies:
   # base
   - r-base =3.6.1
   - python >=3.7
-  # render markdown
-  - r-rmarkdown =1.15
-  - r-reticulate =1.12
-  - r-bookdown =0.12
-  - r-rmdformats =0.3.5
-  - docopt =0.6.2
+  # render
+  - reportsrender >=0.3
   # do the analysis
   - r-ggplot2
   - r-dplyr
