@@ -7,10 +7,12 @@ dependencies:
   - r-base =3.6.1
   - python >=3.7
   # render
-  - reportsrender >=0.3
+  - grst::reportsrender >=0.2.1
   # do the analysis
   - r-ggplot2
   - r-dplyr
   - r-readr
+  - pip:
+      - reportsrender >=0.3.0
 
 
