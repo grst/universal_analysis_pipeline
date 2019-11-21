@@ -5,10 +5,10 @@ Test the pipeline results:
 """
 
 
-with open('results/02_analyze_data_rmd/report.html') as f:
+with open('results/02_analyze_data_rmd/02_analyze_data_rmd.html') as f:
    report_rmd = f.read()
 
-with open('results/02_analyze_data_papermill/report.html') as f:
+with open('results/02_analyze_data_papermill/02_analyze_data_papermill.html') as f:
    report_papermill = f.read()
 
 
