@@ -16,5 +16,6 @@ raw
 .idea
 .nextflow*
 work
-deploy
+!deploy/.gitignore
+deploy/*
 .access_token
