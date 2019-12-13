@@ -1,0 +1,9 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - grst::reportsrender
+  - r-ggplot2
+  - r-readr
+  - pandas
